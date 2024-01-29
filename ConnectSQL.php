@@ -3,7 +3,8 @@ $host='localhost';
 $db = 'FreeBot';
 $username = 'dbuser';
 $password = 'admin';
- 
+  
+
 # Создаем соединение с базой PostgreSQL с указанными выше параметрами
 $dbconn = pg_connect("host=$host port=5432 dbname=$db user=$username password=$password");
  
@@ -20,7 +21,7 @@ if (!$res) {
 
 }
 }
-# Выведем список таблиц и столбцов в каждой таблице
+# Выведем список таблиц и столбцов в каждой таблице w
 
 while ($row = pg_fetch_row($res)) {
     echo "tableName: $row[0] ColumnName: $row[1]";
