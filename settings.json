@@ -1,0 +1,8 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "git.autofetch": true,
+    "github-enterprise.uri": "https://github.com/bronivichok1",
+    "http.proxyAuthorization": null,
+    "phpserver.phpPath": "C:/php/php.exe",
+    "php.debug.executablePath": "C:/php/phpdbg.exe"
+}
