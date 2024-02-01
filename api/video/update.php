@@ -22,7 +22,7 @@ $video = new Video($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // установим id свойства товара для редактирования
-$video->video = $data->video;
+$video->id = $data->id;
 
 // установим значения свойств товара
 $video->video = $data->video;
