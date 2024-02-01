@@ -134,4 +134,58 @@ function update()
     }
     return false;
 }
+// метод для удаления товара
+function delete()
+{
+    // запрос для удаления записи (товара)
+    $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+
+    // подготовка запроса
+    $stmt = $this->conn->prepare($query);
+
+    // очистка
+    $this->id = htmlspecialchars(strip_tags($this->id));
+
+    // привязываем id записи для удаления
+    $stmt->bindParam(1, $this->id);
+
+    // выполняем запрос
+    if ($stmt->execute()) {
+        return true;
+    }
+    return false;
+}
+// метод для поиска товаров
+function search($keywords)
+{
+    // поиск записей (товаров) по "названию товара", "описанию товара", "названию категории"
+    $query = "SELECT
+            c.name as category_name, p.id, p.name, p.description, p.price, p.category_id, p.created
+        FROM
+            " . $this->table_name . " p
+            LEFT JOIN
+                categories c
+                    ON p.category_id = c.id
+        WHERE
+            p.name LIKE ? OR p.description LIKE ? OR c.name LIKE ?
+        ORDER BY
+            p.created DESC";
+
+    // подготовка запроса
+    $stmt = $this->conn->prepare($query);
+
+    // очистка
+    $keywords = htmlspecialchars(strip_tags($keywords));
+    $keywords = "%{$keywords}%";
+
+    // привязка
+    $stmt->bindParam(1, $keywords);
+    $stmt->bindParam(2, $keywords);
+    $stmt->bindParam(3, $keywords);
+
+    // выполняем запрос
+    $stmt->execute();
+
+    return $stmt;
+}
 }
